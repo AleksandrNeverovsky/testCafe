@@ -13,5 +13,13 @@
     "gameImageLink":"div.spotlight_img>a", 
     "loginButton":"a.global_action_link", 
     "filterItem":"a.gutter_item", 
-    "specialOffersCheckbox":"span.tab_filter_control"
+    "specialOffersCheckbox":"span.tab_filter_control",
+    "searchItemName":"span.title",
+    "searchResultRow": "a.search_result_row",
+    "ageDayDropdown": "select#ageDay",
+    "ageMonthDropdown": "select#ageMonth",
+    "ageYearDropdown": "select#ageYear",
+    "viewPageButton": "#view_product_page_btn",
+    "validDateModal": "div.newmodal_content",
+    "okButton": "div.btn_grey_steamui"
 }

@@ -3,9 +3,7 @@ const createTestCafe = require('testcafe');
 const testControllerHolder = require('./testControllerHolder');
 const {AfterAll, setDefaultTimeout, Before, After} = require('@cucumber/cucumber');
 
-
 const timeout = 100000;
-
 let cafeRunner = null;
 
 function createTestFile() {
@@ -13,8 +11,9 @@ function createTestFile() {
         'import testControllerHolder from "./project/features/support/testControllerHolder.js";\n\n' +
         'fixture("cucumberfixture")\n' +
         'test\n' +
-        '("test", testControllerHolder.capture)')
+        '("test", testControllerHolder.capture)');
 }
+
 function runTest(browser) {
     createTestCafe('localhost', 1337, 1338)
         .then(function(tc) {
@@ -25,13 +24,15 @@ function runTest(browser) {
                 .screenshots('reports/screenshots/', true)
                 .browsers(`${browser}`)
                 .run();
-        }).then(function(report) {
         });
 }
 
 setDefaultTimeout(timeout);
+
 Before(function() {
-    fs.rmdirSync('reports/screenshots', { recursive: true });
+    if (fs.existsSync('reports/screenshots')) {
+        fs.rmSync('reports/screenshots', { recursive: true, force: true });
+    }
     runTest('chrome');
     createTestFile();
     return this.waitForTestController.then(function(testController) {
@@ -40,7 +41,9 @@ Before(function() {
 });
 
 After(function() {
-    fs.unlinkSync('cucumbertest.js');
+    if (fs.existsSync('cucumbertest.js')) {
+        fs.unlinkSync('cucumbertest.js');
+    }
     testControllerHolder.free();
 });
 
@@ -49,11 +52,15 @@ AfterAll(function() {
     function waitForTestCafe() {
         intervalId = setInterval(checkLastResponse, 500);
     }
+
     function checkLastResponse() {
-        if (testController.testRun.lastDriverStatusResponse === 'test-done-confirmation') {
+        const testController = testControllerHolder.testController;
+        if (testController && testController.testRun.lastDriverStatusResponse === 'test-done-confirmation') {
             cafeRunner.close();
+            clearInterval(intervalId);
             process.exit();
         }
     }
+
     waitForTestCafe();
 });

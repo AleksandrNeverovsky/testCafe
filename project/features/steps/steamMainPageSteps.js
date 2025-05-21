@@ -54,6 +54,11 @@ Then('Url current page contains {string}.', async(pageUrl) => {
     await testController.expect(await Browser.getCurrentUrl()).contains(pageUrl);
 });
 
+Then('Modal with text {string} displayed.', async(text) => {
+    const actualText = await steamMainPage.getValidateModalText();
+    await testController.expect(actualText).contains(text);
+});
+
 When('Enter game name {string}.', async(nameGame) => {
     await steamMainPage.typeNameGame(nameGame);
 });
@@ -86,6 +91,10 @@ When('Click login button.', async() => {
     await steamMainPage.clickLoginButton();
 });
 
+When('Click View Page button.', async() => {
+    await steamMainPage.clickViewPageButton();
+});
+
 When('Enter username {string}.', async(username) => {
     await steamLoginForm.typeUsername(username);
 });
@@ -104,4 +113,20 @@ When('Click on filter item {string}.', async(filterItemMenu) => {
 
 When('Click on special offers checkbox.', async() => {
     await steamMainPage.clickSpecialOffersCheckbox();
+});
+
+When('Click on OK button.', async() => {
+    await steamMainPage.clickOkButton();
+});
+
+When('Click on {string} search item button.', async(name) => {
+    await steamMainPage.clickSearchItemByName(name);
+});
+
+When('Set as date current date.', async() => {
+    await steamMainPage.selectCurrentDate();
+});
+
+When('Set as date {string}.', async(dateString) => {
+    await steamMainPage.selectDate(dateString);
 });
