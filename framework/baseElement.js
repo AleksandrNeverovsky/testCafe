@@ -46,6 +46,11 @@ class BaseElement{
         return new BaseElement(this.name, element.nth(number - 1))
     }
 
+    getChildElementBySelector(selector) {
+        const element = this.findElement();
+        return new BaseElement(`${this.name} child element`, element.find(selector));
+    }
+
     async getAttribute(attribute){
         const element = this.findElement();
         return element.getAttribute(attribute);
