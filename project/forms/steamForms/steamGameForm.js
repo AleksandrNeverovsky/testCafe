@@ -1,12 +1,6 @@
-const Icon = require('../../../framework/Icon');
-const Input = require('../../../framework/input');
 const Label = require('../../../framework/label');
 const BaseForm = require('../../../framework/baseForm');
-const Dropdown = require('../../../framework/dropdown');
-const Button = require('../../../framework/button');
-const StringUtils = require('../../../framework/utils/stringUtils');
 const locators = require('../../locators/steam/gameForm.json');
-const Checkbox = require('../../../framework/checkbox');
 
 class SteamGameForm extends BaseForm {
 
@@ -33,6 +27,11 @@ class SteamGameForm extends BaseForm {
             throw new Error(`Error checking if publisher sale image is displayed: "${dateString}": ${error.message}`);
             return false;
         }
+    }
+
+    async getPublisherSaleBannerSrc() {
+        const element = this.publisherSaleBannerBig.getElement();
+        return await element.getAttribute('src');
     }
 }
 

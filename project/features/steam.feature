@@ -47,6 +47,7 @@ Feature: Test steam.
         Then Game Page is opened.
         And Game Page for "The Witcher 3: Wild Hunt".
         And Publisher sale image is displayed.
+        And Publisher sale image contains text "CELEBRATING THE 10TH ANNIVERSARY OF THE WITCHER 3: WILD HUNT"
 
         # Search for the "The Witcher 3: Wild Hunt"
         # Open game page

@@ -1,7 +1,5 @@
 const { Given, Then, When } = require('@cucumber/cucumber');
 const steamGameForm = require('../../forms/steamForms/steamGameForm');
-const Browser = require('../../../framework/browser/browser');
-const { ClientFunction } = require('testcafe');
 const steamMainPage = require("../../forms/steamForms/steamMainForm");
 
 function sleep(ms) {

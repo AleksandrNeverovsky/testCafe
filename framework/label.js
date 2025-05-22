@@ -1,9 +1,14 @@
-const BaseElement = require("./baseElement");
+const { Selector } = require('testcafe');
+const BaseElement = require('./baseElement');
 
-class Label extends BaseElement{
+class Label extends BaseElement {
 
-    constructor(name, locator){
+    constructor(name, locator) {
         super(name, locator)
+    }
+
+    getElement() {
+        return Selector(this.locator).with({boundTestRun: testController});
     }
 }
 
